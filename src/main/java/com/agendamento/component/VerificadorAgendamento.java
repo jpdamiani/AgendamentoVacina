@@ -37,6 +37,4 @@ public class VerificadorAgendamento {
         		.isEqual(agenda.getDataAgendamento().toLocalDate()))
         		.forEach(agenda -> notificacao.sendMailLembrete(agenda));       
     }
-
-
 }
