@@ -35,3 +35,4 @@ build/
 
 ### ECLIPSE ###
 .metadata
+*.jar
