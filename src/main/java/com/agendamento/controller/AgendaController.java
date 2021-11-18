@@ -27,13 +27,13 @@ public class AgendaController {
 	private NotificacaoService _notificacaoService;
 	
 	@RequestMapping(value = "/agenda", method = RequestMethod.GET)
-	public List<Agenda> Get() {
+	public List<Agenda> pesquisaAgendaGeral() {
 		return _agendaRepository.findAll();
 	}
 
 
 	@RequestMapping(value = "/agenda/{id}", method = RequestMethod.GET) 
-	public ResponseEntity<Agenda> GetById(@PathVariable(value = "id") long id) {
+	public ResponseEntity<Agenda> pesquisaAgendaById(@PathVariable(value = "id") long id) {
 		Optional<Agenda> agenda = _agendaRepository.findById(id); 
 		if(agenda.isPresent()) 
 			return new ResponseEntity<Agenda>(agenda.get(),HttpStatus.OK); 
@@ -45,7 +45,7 @@ public class AgendaController {
 	
 
 	@RequestMapping(value = "/agenda", method = RequestMethod.POST) 
-	public Agenda Post(@Validated @RequestBody Agenda agenda) { 
+	public Agenda criaAgendamento(@Validated @RequestBody Agenda agenda) { 
 		_notificacaoService.sendMailConfirmacao(agenda);
 		return _agendaRepository.save(agenda); 
 	}
@@ -53,7 +53,7 @@ public class AgendaController {
 
 
 	@RequestMapping(value = "/agenda/{id}", method = RequestMethod.PUT) 
-	public ResponseEntity<Agenda> Put(@PathVariable(value = "id") long id, @Validated @RequestBody Agenda newAgenda) { 
+	public ResponseEntity<Agenda> alteraDataAgendamento(@PathVariable(value = "id") long id, @Validated @RequestBody Agenda newAgenda) { 
 		Optional<Agenda> oldAgenda = _agendaRepository.findById(id); 
 		if(oldAgenda.isPresent()){ 
 			Agenda agenda = oldAgenda.get(); 
@@ -67,7 +67,7 @@ public class AgendaController {
 
 
 	@RequestMapping(value = "/agenda/{id}", method = RequestMethod.DELETE) 
-	public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id) {
+	public ResponseEntity<Object> deletaAgendamento(@PathVariable(value = "id") long id) {
 		Optional<Agenda> agenda = _agendaRepository.findById(id);
 		if(agenda.isPresent()){ 
 			_agendaRepository.delete(agenda.get()); 
