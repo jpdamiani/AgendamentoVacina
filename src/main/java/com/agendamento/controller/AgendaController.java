@@ -58,6 +58,9 @@ public class AgendaController {
 		if(oldAgenda.isPresent()){ 
 			Agenda agenda = oldAgenda.get(); 
 			agenda.setDataAgendamento(newAgenda.getDataAgendamento());
+			agenda.setDose(newAgenda.getDose());
+			agenda.setPosto(newAgenda.getPosto());
+			agenda.setUsuario(newAgenda.getUsuario());
 			_agendaRepository.save(agenda);
 
 			return new ResponseEntity<Agenda>(agenda, HttpStatus.OK); 
